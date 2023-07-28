@@ -1,49 +1,21 @@
-package com.example.OrderManagement.Mine.entity;
+package com.example.OrderManagement.Mine.dto;
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-
-import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Set;
 
-@Entity
-@Table(name = "customer")
-@TypeDefs({@TypeDef(name="json",typeClass = JsonTypeId.class)})
-public class Customer {
-    @Id
-    @Column(name = "customer_id",length=45)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class CustomerDTO {
     private int customerID;
-
-    @Column(name = "customer_name",length=100,nullable = false)
     private String customerName;
-
-    @Column(name = "customer_address",length=255)
     private String customerAddress;
-
-    @Column(name = "salary",length = 10)
     private double salary;
-
-    @Type(type = "json")
-    @Column(name="contact_numbers",length=10,columnDefinition = "json")
     private ArrayList contactNumbers;
-
-    @Column(name = "nic",length = 10)
     private String nic;
-
-    @Column(name = "active_state",columnDefinition = "TINYINT default 1")
     private boolean activeState;
 
-    @OneToMany(mappedBy = "customers")
-    private Set<Order> orders;
 
-    public Customer(){
 
+    public CustomerDTO(){
     }
-    public Customer(int customerID, String customerName, String customerAddress, double salary, ArrayList contactNumbers, String nic, boolean activeState) {
+    public CustomerDTO(int customerID, String customerName, String customerAddress, double salary, ArrayList contactNumbers, String nic, boolean activeState) {
         this.customerID = customerID;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
@@ -51,7 +23,6 @@ public class Customer {
         this.contactNumbers = contactNumbers;
         this.nic = nic;
         this.activeState = activeState;
-
     }
 
     public int getCustomerID() {
@@ -112,7 +83,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "CustomerDTO{" +
                 "customerID=" + customerID +
                 ", customerName='" + customerName + '\'' +
                 ", customerAddress='" + customerAddress + '\'' +
@@ -120,10 +91,6 @@ public class Customer {
                 ", contactNumbers=" + contactNumbers +
                 ", nic='" + nic + '\'' +
                 ", activeState=" + activeState +
-                ", orders=" + orders +
                 '}';
     }
-
-
-
 }

@@ -1,5 +1,6 @@
 package com.example.OrderManagement.Mine.entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "orders")
 @Data
-@TypeDefs({@TypeDef(name = "json",typeClass = JsonType.class)})
+@TypeDefs({@TypeDef(name = "json",typeClass = JsonTypeId.class)})
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -27,7 +28,7 @@ public class Order {
     private Date date;
 
     @Column(name = "total" , nullable = false)
-    private Double total;
+    private double total;
 
     @ManyToOne
     @Column(name = "customer_id" , nullable = false)
