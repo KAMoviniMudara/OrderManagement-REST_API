@@ -1,5 +1,6 @@
 package com.example.OrderManagement.Mine.entity;
 
+import com.example.OrderManagement.Mine.entity.enums.MeasuringUnitType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "item")
-@TypeDefs({@TypeDef(name = "json",typeClass = JsonType.class)
-})
+@TypeDefs({@TypeDef(name = "json",typeClass = JsonType.class)})
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
