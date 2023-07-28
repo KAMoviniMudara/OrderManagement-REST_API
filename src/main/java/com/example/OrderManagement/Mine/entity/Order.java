@@ -28,7 +28,7 @@ public class Order {
     private Date date;
 
     @Column(name = "total" , nullable = false)
-    private double total;
+    private Double total;
 
     @ManyToOne
     @Column(name = "customer_id" , nullable = false)
