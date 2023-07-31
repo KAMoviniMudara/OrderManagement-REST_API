@@ -1,9 +1,9 @@
 package com.example.OrderManagement.Mine.Service;
 
 
-import com.example.OrderManagement.Mine.dto.request.RequestItemSaveDTO;
+import com.example.OrderManagement.Mine.dto.request.RequestOrderSaveDTO;
 
 public interface OrderService {
-    String addOrder(RequestItemSaveDTO requestItemSaveDTO);
+    String addOrder(RequestOrderSaveDTO requestItemSaveDTO);
 
 }

@@ -4,6 +4,7 @@ import com.example.OrderManagement.Mine.Service.ItemService;
 import com.example.OrderManagement.Mine.dto.ItemDTO;
 import com.example.OrderManagement.Mine.dto.request.RequestItemSaveDTO;
 import com.example.OrderManagement.Mine.entity.Item;
+import com.example.OrderManagement.Mine.exception.NotFoundException;
 import com.example.OrderManagement.Mine.repo.ItemRepo;
 import com.example.OrderManagement.Mine.util.mappers.ItemMapper;
 import org.modelmapper.ModelMapper;
@@ -36,7 +37,7 @@ public class ItemServiceIMPL implements ItemService {
     @Override
     public List<ItemDTO> getItemByName(String itemName){
         List<Item> items = itemRepo.findAllByItemName(itemName);
-        List<ItemDTO> itemDTOS = itemMapper.requestEntityListToDtoLIst(items);
+        List<ItemDTO> itemDTOS = itemMapper.requestEntityListToDtoList(items);
         return itemDTOS;
     }
 
@@ -48,7 +49,7 @@ public class ItemServiceIMPL implements ItemService {
             List<ItemDTO> itemDTOS = itemMapper.requestEntityListToDtoList(items);
             return itemDTOS;
         } else {
-            throw new ChangeSetPersister.NotFoundException("No data found");
+            throw new NotFoundException("No data found");
         }
 
     }

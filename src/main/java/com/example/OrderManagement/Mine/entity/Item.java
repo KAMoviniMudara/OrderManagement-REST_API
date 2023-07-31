@@ -1,6 +1,5 @@
 package com.example.OrderManagement.Mine.entity;
 
-import com.example.OrderManagement.Mine.entity.enums.MeasuringUnitType;
 import com.fasterxml.jackson.annotation.JsonTypeId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,9 +25,7 @@ public class Item {
     @Column(name = "item_name",length = 100,nullable = false)
     private String itemName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "measure_type",length = 25,nullable = false)
-    private MeasuringUnitType measuringUnitType;
+   
 
     @Column(name = "balance_qty",length = 50,nullable = false)
     private double balanceQty;

@@ -28,4 +28,10 @@ public class OrderDetails {
     @ManyToOne
     @JoinColumn(name = "item_id",nullable = false)
     private Item items;
+
+    public void setOrders(Order order) {
+    }
+
+    public void setItems(Item byId) {
+    }
 }

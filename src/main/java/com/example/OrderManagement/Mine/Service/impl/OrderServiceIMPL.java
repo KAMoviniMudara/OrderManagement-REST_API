@@ -8,8 +8,8 @@ import com.example.OrderManagement.Mine.repo.CustomerRepo;
 import com.example.OrderManagement.Mine.repo.ItemRepo;
 import com.example.OrderManagement.Mine.repo.OrderDetailsRepo;
 import com.example.OrderManagement.Mine.repo.OrderRepo;
-import net.bytebuddy.description.method.MethodDescription;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Character.getType;
+
 
 @Service
 @Transactional
@@ -35,8 +35,10 @@ public class OrderServiceIMPL implements OrderService {
 
     @Override
     @Transactional
-    public String addOrder(RequestOrderSaveDTO requestOrderSaveDTO){
+    public String addOrder(RequestOrderSaveDTO requestOrderSaveDTO) {
+
         Order order = new Order(
+
                 requestOrderSaveDTO.getDate(),
                 requestOrderSaveDTO.getTotal(),
                 customerRepo.getById(requestOrderSaveDTO.getCustomers())
@@ -44,17 +46,18 @@ public class OrderServiceIMPL implements OrderService {
 
         orderRepo.save(order);
 
-        if(orderRepo.existsById(order.getOrderID())){
+        if (orderRepo.existsById(order.getOrderID())) {
             List<OrderDetails> orderDetails = new ArrayList<>();
 
-            orderDetails = modelMapper.map(requestOrderSaveDTO.getOrderDetails(), TypeToken<List<OrderDetails>>(){}
-            .getType());
+            orderDetails = modelMapper.map(requestOrderSaveDTO.getOrderDetails(), new TypeToken<List<OrderDetails>>() {
+            }
+                    .getType());
 
-            for(int i=0; i<orderDetails.size();i++){
+            for (int i = 0; i < orderDetails.size(); i++) {
                 orderDetails.get(i).setOrders(order);
                 orderDetails.get(i).setItems(itemRepo.getById(requestOrderSaveDTO.getOrderDetails().get(i).getItems()));
             }
-            if(orderDetails.size()>0){
+            if (orderDetails.size() > 0) {
                 orderDetailsRepo.saveAll(orderDetails);
             }
             return "saved";

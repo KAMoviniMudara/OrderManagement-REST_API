@@ -5,6 +5,7 @@ import com.example.OrderManagement.Mine.dto.CustomerDTO;
 import com.example.OrderManagement.Mine.entity.Customer;
 import com.example.OrderManagement.Mine.repo.CustomerRepo;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,7 +75,7 @@ public class CustomerServiceIMPL implements CustomerService {
         List<Customer>getCustomers = customerRepo.findAll();
         List<CustomerDTO>customerDTOList=new ArrayList<>();
         if(customerDTOList!=null){
-            customerDTOList = modelMapper.map(getCustomers,TypeToken<List<CustomerDTO>>(){}
+            customerDTOList = modelMapper.map(getCustomers,new TypeToken<List<CustomerDTO>>(){}
                 .getType());
         }
         return customerDTOList;
